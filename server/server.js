@@ -32,17 +32,25 @@ app.get('/todos', (req, res) => {
 //Get Specific todos by ID
 app.get('/todos/:id', (req, res) => {
   var id = req.params.id;
+
+  // check wether ID is valid
   if(!ObjectID.isValid(id)){
     return res.status(400).send();
   }
 
+  //Request by ID
   Todo.findById(id).then((todo) => {
+    
+    //Check todo exists 
     if(!todo){
       return res.status(400).send();
     }
     
+    //printing todo in body
     res.send({todo});
-  }).catch((e )=> {
+  })
+  // Send status 400 in any error
+  .catch((e )=> {
     res.status(400).send();
   });
 });
