@@ -23,8 +23,8 @@ app.post('/todos', (req, res) => {
 });
 //Get /todos
 app.get('/todos', (req, res) => {
-  Todo.find().then((docs)=> {
-    res.send(docs);
+  Todo.find().then((todos)=> {
+    res.send({todos});
   }, (e) => {
     res.status(400).send(e);
   });
@@ -35,7 +35,7 @@ app.get('/todos/:id', (req, res) => {
 
   // check wether ID is valid
   if(!ObjectID.isValid(id)){
-    return res.status(400).send();
+    return res.status(404).send();
   }
 
   //Request by ID
@@ -43,15 +43,15 @@ app.get('/todos/:id', (req, res) => {
     
     //Check todo exists 
     if(!todo){
-      return res.status(400).send();
+      return res.status(404).send();
     }
     
     //printing todo in body
     res.send({todo});
   })
-  // Send status 400 in any error
+  // Send status 404 in any error
   .catch((e )=> {
-    res.status(400).send();
+    res.status(404).send();
   });
 });
 
