@@ -1,3 +1,5 @@
+// includes config file to auto-set enviroment accordingly
+require('./config/config');
 // external dependencies
 const _ = require('lodash');
 const express = require('express');
@@ -9,7 +11,7 @@ var {User} = require('./models/user');
 var {mongoose} = require('./db/mongoose');
 
 // port
-var port = process.env.PORT || 3000;
+var port = process.env.PORT;
 // App
 var app = express();
 // App Middleware body-parser
