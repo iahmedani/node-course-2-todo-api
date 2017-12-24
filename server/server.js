@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 var {mongoose} = require('./db/mongoose');
+
+// port
+var port = process.env.PORT || 3000;
 // App
 var app = express();
 // App Middleware body-parser
@@ -56,8 +59,8 @@ app.get('/todos/:id', (req, res) => {
 });
 
 //App startup
-app.listen(3000, () => {
-  console.log('Server started at 3000');
+app.listen(port, () => {
+  console.log(`Server started at port: ${port}`);
 });
 //Exporting app
 module.exports = {app};
